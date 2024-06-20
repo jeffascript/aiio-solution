@@ -5,6 +5,7 @@ import subProducts from '../../../public/data/subproducts.json'
 import PolymorphicInput from '@/atoms/PolyMorphicInput'
 
 import { useToggleItem } from '@/hooks/useToggleItem'
+import CheckboxInput from '@/atoms/CheckboxInput'
 
 const SubproductsListView = ({
   subCategoryId,
@@ -44,8 +45,8 @@ const SubproductsListView = ({
       {processedSubProducts.map(({ subProductId, subProductName }) => (
         <React.Fragment key={`${subCategoryId}-${subProductId}-${subProductName}`}>
           <CheckboxWrapper innermostCheckbox>
-            <PolymorphicInput
-              type="checkbox"
+            <CheckboxInput
+              id={`${subCategoryId}-${subProductId}-${subProductName}`}
               label={subProductName}
               name={subProductName}
               checked={
@@ -54,7 +55,6 @@ const SubproductsListView = ({
               onChange={() =>
                 handleToggleSelectedItem(`${subCategoryId}-${subProductId}-${subProductName}`)
               }
-              id={subProductId}
             />
           </CheckboxWrapper>
         </React.Fragment>

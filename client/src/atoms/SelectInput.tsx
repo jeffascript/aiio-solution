@@ -1,13 +1,13 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef } from 'react'
 
 type SelectInputProps = {
-  name: string;
-  options: string[];
-  placeholder?: string;
-} & React.ComponentPropsWithoutRef<"select">;
+  name: string
+  options: string[]
+  placeholder?: string
+} & React.ComponentPropsWithoutRef<'select'>
 
 const SelectInput = forwardRef<HTMLSelectElement, SelectInputProps>(
-  ({ placeholder = "Select...", options, ...props }, ref) => {
+  ({ placeholder = 'Select...', options, ...props }, ref) => {
     return (
       <select ref={ref} {...props}>
         <option value="">{placeholder} </option>
@@ -17,8 +17,10 @@ const SelectInput = forwardRef<HTMLSelectElement, SelectInputProps>(
           </option>
         ))}
       </select>
-    );
+    )
   }
-);
+)
 
-export default SelectInput;
+SelectInput.displayName = 'SelectInput'
+
+export default SelectInput

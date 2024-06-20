@@ -1,4 +1,4 @@
-import { Action, State } from './toggleItemtypes'
+import { Action, State } from './toggleItemActions'
 
 export const toggleItemReducer = (state: State, action: Action): State => {
   switch (action.type) {

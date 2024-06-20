@@ -1,5 +1,5 @@
 import { useCallback } from 'react'
-import { useToggleItemContext } from '@/context/toggleSelectedItem/ToggleItemContext'
+import { useToggleItemContext } from '@/context/ToggleItemContext/ToggleItemProvider'
 
 type GroupType = 'products' | 'subcategories' | 'subproducts'
 

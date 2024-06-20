@@ -7,6 +7,7 @@ import PolymorphicInput from '@/atoms/PolyMorphicInput'
 import { SubProducts } from '@/components/SubProducts'
 import { useToggleItem } from '@/hooks/useToggleItem'
 import ConditionalRender from '@/molecules/ConditionalRender'
+import CheckboxInput from '@/atoms/CheckboxInput'
 
 const SubcategoriesListView = ({
   children,
@@ -26,15 +27,14 @@ const SubcategoriesListView = ({
       {preparedSubcategories.map(({ subCategoryName, subCategoryId }) => (
         <React.Fragment key={`${productId}-${subCategoryId}-${subCategoryName}`}>
           <CheckboxWrapper key={subCategoryId}>
-            <PolymorphicInput
+            <CheckboxInput
               label={subCategoryName}
-              type="checkbox"
+              id={`${productId}-${subCategoryId}-${subCategoryName}`}
               name={subCategoryName}
               checked={!!selectedItem?.[`${productId}-${subCategoryId}-${subCategoryName}`]}
               onChange={() => {
                 handleToggleSelectedItem(`${productId}-${subCategoryId}-${subCategoryName}`)
               }}
-              id={subCategoryId}
             />
           </CheckboxWrapper>
           <ConditionalRender

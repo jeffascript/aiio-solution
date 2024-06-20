@@ -1,3 +1,4 @@
+import React from 'react'
 import ArrowIcon from '@/assets/arrow.svg?react'
 
 import styles from '@/molecules/molecules.module.css'

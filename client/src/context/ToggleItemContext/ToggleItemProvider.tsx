@@ -1,6 +1,6 @@
 import { useMemo, useReducer } from 'react'
 import { createGenericContext } from '@/hooks/useGenericContext'
-import { State, ToggleItemContextType } from './toggleItemtypes'
+import { State, ToggleItemContextType } from './toggleItemActions'
 import { toggleItemReducer } from './toggleItemReducer'
 
 const initialState: State = {

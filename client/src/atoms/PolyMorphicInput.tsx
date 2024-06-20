@@ -25,14 +25,11 @@ const PolymorphicInput = forwardRef(
 
     const InputComponent = type ? InputFactories[type] : Component
     return (
-      <InputComponent
-        ref={ref}
-        name={name}
-        {...props}
-        {...(type === 'select' && { options })}
-      />
+      <InputComponent ref={ref} name={name} {...props} {...(type === 'select' && { options })} />
     )
   }
 )
+
+PolymorphicInput.displayName = 'PolymorphicInput'
 
 export default PolymorphicInput

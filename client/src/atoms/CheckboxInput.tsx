@@ -1,4 +1,4 @@
-import { forwardRef } from 'react'
+import React, { forwardRef } from 'react'
 import styles from '@/atoms/atoms.module.css'
 
 type CheckboxInputProps = {
@@ -17,5 +17,7 @@ const CheckboxInput = forwardRef<HTMLInputElement, CheckboxInputProps>(
     )
   }
 )
+
+CheckboxInput.displayName = 'CheckboxInput'
 
 export default CheckboxInput

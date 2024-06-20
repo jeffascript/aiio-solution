@@ -7,16 +7,20 @@ import PlusIcon from '@/assets/plus.svg?react'
 import Footer from '@/molecules/Footer'
 import ProductsListView from './ProductsListView'
 
+import { ProductsProvider } from '@/context/ProductsContext'
+
 const Products = ({ children }: { children: React.ReactNode }) => {
   return (
     <Container backgroundColor="var(--primary-color)">
       <Header>
         <HeaderTitle>Products</HeaderTitle>
-        <Button onClick={() => console.log('hello ')}>Done</Button>
+        <Button onClick={() => console.log('hello')}>Done</Button>
       </Header>
 
       <Body>
-        <ProductsListView> {children}</ProductsListView>
+        <ProductsProvider>
+          <ProductsListView> {children}</ProductsListView>
+        </ProductsProvider>
       </Body>
 
       <Footer>
