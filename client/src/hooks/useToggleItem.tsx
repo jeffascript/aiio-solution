@@ -1,5 +1,5 @@
 import { useCallback } from 'react'
-import { useToggleItemContext } from '@/context/ToggleItemContext'
+import { useToggleItemContext } from '@/context/toggleSelectedItem/ToggleItemContext'
 
 type GroupType = 'products' | 'subcategories' | 'subproducts'
 
@@ -9,12 +9,12 @@ export const useToggleItem = (group: GroupType) => {
     toggleState: { selectedItems },
   } = useToggleItemContext()
 
-  const handleToggleItem = useCallback(
+  const handleToggleSelectedItem = useCallback(
     (item: string) => {
       dispatch({ type: 'TOGGLE_ITEM', payload: { group, item } })
     },
     [dispatch, group]
   )
 
-  return { handleToggleItem, selectedItem: selectedItems[group] }
+  return { handleToggleSelectedItem, selectedItem: selectedItems[group] }
 }

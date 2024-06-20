@@ -2,11 +2,14 @@ import React from 'react'
 
 import { Main } from '@/components'
 import Products from './components/Products/Products'
+import { ToggleItemProvider } from './context/toggleSelectedItem'
 
 const App: React.FC = () => {
   return (
     <Main>
-      <Products>products</Products>
+      <ToggleItemProvider>
+        <Products>products</Products>
+      </ToggleItemProvider>
     </Main>
   )
 }

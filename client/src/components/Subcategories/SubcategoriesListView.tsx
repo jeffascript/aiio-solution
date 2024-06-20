@@ -5,6 +5,8 @@ import subcategories from '../../../public/data/subcategories.json'
 import PolymorphicInput from '@/atoms/PolyMorphicInput'
 
 import { SubProducts } from '@/components/SubProducts'
+import { useToggleItem } from '@/hooks/useToggleItem'
+import ConditionalRender from '@/molecules/ConditionalRender'
 
 const SubcategoriesListView = ({
   children,
@@ -13,32 +15,33 @@ const SubcategoriesListView = ({
   children?: React.ReactNode
   productId: number
 }) => {
-  const filteredSubcategories = subcategories.subcategories.filter(
+  const preparedSubcategories = subcategories.subcategories.filter(
     (subcategory) => subcategory.productId === productId
   )
 
-  const [selectedSubcategory, setSelectedSubcategory] = React.useState<Record<number, boolean>>({})
-
-  const handleSelectedSubcategory = (subCategoryId: number) => {
-    setSelectedSubcategory((prev) => ({ ...prev, [subCategoryId]: !prev[subCategoryId] }))
-  }
+  const { handleToggleSelectedItem, selectedItem } = useToggleItem('subcategories')
 
   return (
     <>
-      {filteredSubcategories.map(({ subCategoryName, subCategoryId }) => (
-        <React.Fragment key={`${subCategoryId}.${subCategoryName}`}>
+      {preparedSubcategories.map(({ subCategoryName, subCategoryId }) => (
+        <React.Fragment key={`${productId}-${subCategoryId}-${subCategoryName}`}>
           <CheckboxWrapper key={subCategoryId}>
             <PolymorphicInput
               label={subCategoryName}
               type="checkbox"
               name={subCategoryName}
-              checked={!!selectedSubcategory?.[subCategoryId]}
-              onChange={() => handleSelectedSubcategory(subCategoryId)}
+              checked={!!selectedItem?.[`${productId}-${subCategoryId}-${subCategoryName}`]}
+              onChange={() => {
+                handleToggleSelectedItem(`${productId}-${subCategoryId}-${subCategoryName}`)
+              }}
               id={subCategoryId}
             />
           </CheckboxWrapper>
-
-          {selectedSubcategory?.[subCategoryId] && <SubProducts subCategoryId={subCategoryId} />}
+          <ConditionalRender
+            condition={!!selectedItem?.[`${productId}-${subCategoryId}-${subCategoryName}`]}
+          >
+            {<SubProducts subCategoryId={subCategoryId} />}
+          </ConditionalRender>
         </React.Fragment>
       ))}
     </>

@@ -9,7 +9,7 @@
   display: flex;
   flex-direction: column;
   width: 90%;
-  max-width: 550px; /*  45% ?*/
+  max-width: 80%; /* 550px 45% ?*/
   margin: 10% auto;
   align-items: center;
 }
@@ -17,4 +17,10 @@
 .main__container-children {
   width: 100%;
   padding: 0.4rem;
+}
+
+@media (min-width: 600px) {
+  .main__container-shell {
+    max-width: 550px; /* 550px 45% ?*/
+  }
 }
