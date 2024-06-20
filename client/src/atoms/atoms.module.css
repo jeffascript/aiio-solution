@@ -1,0 +1,7 @@
+.input__checkbox {
+  accent-color: var(--accent-color);
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+  height: 15px;
+  width: 15px;
+}

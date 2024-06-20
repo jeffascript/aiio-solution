@@ -5,6 +5,7 @@ import Container from '@/molecules/Container'
 import { HeaderTitle, Header } from '@/molecules/Header'
 import PlusIcon from '@/assets/plus.svg?react'
 import Footer from '@/molecules/Footer'
+import ProductsListView from './ProductsListView'
 
 const Products = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -14,10 +15,12 @@ const Products = ({ children }: { children: React.ReactNode }) => {
         <Button onClick={() => console.log('hello ')}>Done</Button>
       </Header>
 
-      <Body>{children}</Body>
+      <Body>
+        <ProductsListView> {children}</ProductsListView>
+      </Body>
 
       <Footer>
-        <Button onClick={() => console.log('hello ')} icon={PlusIcon}>
+        <Button onClick={() => console.log('hello ')} Icon={PlusIcon}>
           Add Product
         </Button>
       </Footer>
