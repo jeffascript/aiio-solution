@@ -1,20 +1,20 @@
-.header__container {
+.main__container {
   display: flex;
   flex-direction: column;
   width: 100vw;
   height: 100vh;
 }
 
-.header__container-shell {
+.main__container-shell {
   display: flex;
   flex-direction: column;
   width: 90%;
-  max-width: 450px;
+  max-width: 550px; /*  45% ?*/
   margin: 10% auto;
   align-items: center;
 }
 
-.header__container-children {
+.main__container-children {
   width: 100%;
   padding: 0.4rem;
 }

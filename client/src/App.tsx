@@ -1,8 +1,9 @@
 import React from "react";
-import AppContainer from "@/components/Main/AppContainer";
+
+import { Main } from "@/components";
 
 const App: React.FC = () => {
-  return <AppContainer> Hello </AppContainer>;
+  return <Main> Hello </Main>;
 };
 
 export default App;

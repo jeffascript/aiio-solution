@@ -1,1 +1,1 @@
-export * from "./Main/AppContainer";
+export { default as Main } from "./Main/Main";

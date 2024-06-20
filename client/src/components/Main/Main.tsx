@@ -1,7 +1,7 @@
 import React from "react";
-import styles from "./appContainer.module.css";
+import styles from "@/components/Main/AppContainer.module.css";
 
-const AppContainer = ({ children }: { children: React.ReactNode }) => {
+const Main = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className={styles["header__container"]}>
       <div className={styles["header__container-shell"]}>
@@ -11,4 +11,4 @@ const AppContainer = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default AppContainer;
+export default Main;
