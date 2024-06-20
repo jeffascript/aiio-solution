@@ -1,9 +1,14 @@
-import React from "react";
+import React from 'react'
 
-import { Main } from "@/components";
+import { Main } from '@/components'
+import Products from './components/Products/Products'
 
 const App: React.FC = () => {
-  return <Main> Hello </Main>;
-};
+  return (
+    <Main>
+      <Products>products</Products>
+    </Main>
+  )
+}
 
-export default App;
+export default App

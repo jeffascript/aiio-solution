@@ -1,14 +1,14 @@
-import React from "react";
-import styles from "@/components/Main/AppContainer.module.css";
+import React from 'react'
+import styles from '@/components/Main/main.module.css'
 
 const Main = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className={styles["header__container"]}>
-      <div className={styles["header__container-shell"]}>
-        <div className={styles["header__container-children"]}>{children}</div>
+    <div className={styles['main__container']}>
+      <div className={styles['main__container-shell']}>
+        <div className={styles['main__container-children']}>{children}</div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Main;
+export default Main

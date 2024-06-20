@@ -1,0 +1,101 @@
+.form {
+  width: 100%;
+}
+
+.form__inner {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  align-items: center;
+  padding: 0.6rem;
+}
+
+.form__header {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form__headerTitle {
+  flex: 3 1 auto;
+  display: flex;
+  justify-content: center;
+  margin-left: 15%;
+  color: white;
+  font-size: 1.1rem;
+}
+
+.form__headerIcon {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: end;
+  padding: 5px 10px;
+  border-radius: 3px;
+  font-size: 1rem;
+}
+
+.form__body {
+  align-items: center;
+  background-color: #dedede;
+  border: 7px solid #dedede;
+  display: flex;
+  flex-direction: column;
+  margin: 0.25rem;
+  color: #000000;
+  width: 98%;
+}
+
+.form__searchBarContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+.form__searchBar {
+  width: 96%;
+  border: none;
+  padding: 0.6rem;
+  outline: none;
+  border-radius: 0.025rem;
+  font-size: 1rem;
+}
+
+.form__checkboxContainer {
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  margin: 0.4rem;
+  width: 95%;
+}
+
+.form__checkboxContainer--last {
+  border-top: 1px solid rgb(248, 252, 254);
+  border-bottom: 1px solid rgb(248, 252, 254);
+  background-color: rgb(223, 228, 229);
+}
+
+.form__footer {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: center;
+  margin: 0.2rem;
+}
+
+.form__button {
+  background-color: #dedede;
+  color: black;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.form__buttonText {
+  text-transform: uppercase;
+}
