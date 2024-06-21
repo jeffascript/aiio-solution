@@ -27,7 +27,7 @@ const ProductsProvider = ({ children }: { children: React.ReactNode }) => {
   const productsContextValues = useMemo(
     () => ({
       allProducts: productsResponse?.products || [],
-      allSubcategories: subCategoryResponse?.subcatergories || [],
+      allSubcategories: subCategoryResponse?.subcategories || [],
       allSubproducts: subProductResponse?.subproducts || [],
       isLoading,
       error,

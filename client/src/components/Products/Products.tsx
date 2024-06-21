@@ -8,10 +8,11 @@ import Footer from '@/molecules/Footer'
 import ProductsListView from './ProductsListView'
 
 import { ProductsProvider } from '@/context/ProductsContext'
+import { getStyleToken } from '@/utils/token'
 
 const Products = ({ children }: { children: React.ReactNode }) => {
   return (
-    <Container backgroundColor="var(--primary-color)">
+    <Container backgroundColor={getStyleToken('primaryColor')}>
       <Header>
         <HeaderTitle>Products</HeaderTitle>
         <Button onClick={() => console.log('hello')}>Done</Button>
@@ -24,9 +25,7 @@ const Products = ({ children }: { children: React.ReactNode }) => {
       </Body>
 
       <Footer>
-        <Button onClick={() => console.log('hello ')} Icon={PlusIcon}>
-          Add Product
-        </Button>
+        <Button Icon={PlusIcon}>Add Product</Button>
       </Footer>
     </Container>
   )

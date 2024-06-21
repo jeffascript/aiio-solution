@@ -9,30 +9,32 @@ import Footer from '@/molecules/Footer'
 import SearchBar from '@/molecules/SearchBar'
 import SubcategoriesListView from './SubcategoriesListView'
 import HeaderIcon from '@/molecules/HeaderIcon'
+import { SubcatergoriesProvider } from '@/context/SubcategoryContext'
+import { getStyleToken } from '@/utils/token'
 
 const Subcategories = ({
   children,
-  productId,
+  selectedProductId,
 }: {
   children?: React.ReactNode
-  productId: number
+  selectedProductId: number | null
 }) => {
   return (
-    <Container backgroundColor="var(--darker-color)">
+    <Container backgroundColor={getStyleToken('darkerColor')}>
       <Header>
         <HeaderTitle>Select Categories</HeaderTitle>
         <HeaderIcon />
       </Header>
 
       <Body>
-        <SearchBar>Search ...</SearchBar>
-        <SubcategoriesListView productId={productId}> {children}</SubcategoriesListView>
+        <SubcatergoriesProvider selectedProductId={selectedProductId}>
+          <SearchBar>Search ...</SearchBar>
+          <SubcategoriesListView> {children}</SubcategoriesListView>
+        </SubcatergoriesProvider>
       </Body>
 
       <Footer>
-        <Button onClick={() => console.log('hello ')} Icon={PlusIcon}>
-          Add Product
-        </Button>
+        <Button Icon={PlusIcon}>Add Product</Button>
       </Footer>
     </Container>
   )

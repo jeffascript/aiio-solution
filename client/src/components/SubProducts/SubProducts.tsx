@@ -9,6 +9,8 @@ import Footer from '@/molecules/Footer'
 import SearchBar from '@/molecules/SearchBar'
 import SubProductsListView from './SubProductsListView'
 import HeaderIcon from '@/molecules/HeaderIcon'
+import { SubproductsProvider } from '@/context/SubProductContext'
+import { getStyleToken } from '@/utils/token'
 
 const SubProducts = ({
   children,
@@ -18,15 +20,17 @@ const SubProducts = ({
   subCategoryId: number
 }) => {
   return (
-    <Container backgroundColor="var(--grey-color)">
+    <Container backgroundColor={getStyleToken('greyColor')}>
       <Header>
         <HeaderTitle>Select Sub-Products</HeaderTitle>
         <HeaderIcon />
       </Header>
 
       <Body>
-        <SearchBar>Search ...</SearchBar>
-        <SubProductsListView subCategoryId={subCategoryId}> {children}</SubProductsListView>
+        <SubproductsProvider selectedSubcategoryId={subCategoryId}>
+          <SearchBar>Search ...</SearchBar>
+          <SubProductsListView subCategoryId={subCategoryId}> {children}</SubProductsListView>
+        </SubproductsProvider>
       </Body>
 
       <Footer>

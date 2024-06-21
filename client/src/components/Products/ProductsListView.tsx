@@ -1,8 +1,6 @@
 import CheckboxWrapper from '@/molecules/CheckboxWrapper'
 import React from 'react'
 
-import products from '../../../public/data/products.json'
-import PolymorphicInput from '@/atoms/PolyMorphicInput'
 import { Subcategories } from '@/components/Subcategories'
 import { useToggleItem } from '@/hooks/useToggleItem'
 import ConditionalRender from '@/molecules/ConditionalRender'
@@ -35,7 +33,7 @@ const ProductsListView = ({ children }: { children: React.ReactNode }) => {
           </CheckboxWrapper>
 
           <ConditionalRender condition={!!selectedItem?.[`${productId}-${productName}`]}>
-            {<Subcategories productId={productId} />}
+            <Subcategories selectedProductId={productId} />
           </ConditionalRender>
         </React.Fragment>
       ))}

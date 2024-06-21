@@ -8,10 +8,10 @@ export type Product = {
 }
 
 export type SubCategories = {
-  subcatergories: Subcatergory[]
+  subcategories: Subcategory[]
 }
 
-export type Subcatergory = {
+export type Subcategory = {
   productId: number
   subCategoryId: number
   subCategoryName: string
@@ -29,8 +29,20 @@ export type Subproduct = {
 
 export type ProductsContext = {
   allProducts: Product[]
-  allSubcategories: Subcatergory[]
+  allSubcategories: Subcategory[]
   allSubproducts: Subproduct[]
   isLoading: boolean
   error: string | null
+}
+
+export interface SubcatergoriesContext {
+  filteredSubcategories: Array<Subcategory>
+  setFilteredSubcategories: React.Dispatch<React.SetStateAction<Subcategory[]>>
+  handleSubcategorySearch: (query: string) => void
+}
+
+export interface SubproductsContext {
+  filteredSubProducts: Array<Subproduct>
+  setFilteredSubProducts: React.Dispatch<React.SetStateAction<Subproduct[]>>
+  handleSubproductSearch: (query: string) => void
 }
