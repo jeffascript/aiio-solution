@@ -12,8 +12,7 @@ const SubcategoriesListView = ({ children }: { children?: React.ReactNode }) => 
 
   const { filteredSubcategories: processedSubcategories } = useSubcatergoriesContext()
 
-  if (!processedSubcategories || processedSubcategories.length === 0)
-    return <div>No Sub-category!</div>
+  if (!processedSubcategories || processedSubcategories.length === 0) return <p>No Sub-category!</p>
 
   return (
     <>

@@ -10,6 +10,8 @@ const SubproductsListView = ({ children }: { children?: React.ReactNode }) => {
 
   const { filteredSubProducts: processedSubProducts } = useSubproductsContext()
 
+  if (!processedSubProducts || processedSubProducts.length === 0) return <p>No Sub-Product!</p>
+
   return (
     <>
       {processedSubProducts.map(({ subProductId, subProductName, subCategoryId }) => (

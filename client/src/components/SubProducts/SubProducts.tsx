@@ -28,8 +28,8 @@ const SubProducts = ({
 
       <Body>
         <SubproductsProvider selectedSubcategoryId={subCategoryId}>
-          <SearchBar>Search ...</SearchBar>
-          <SubProductsListView subCategoryId={subCategoryId}> {children}</SubProductsListView>
+          <SearchBar type="subproducts">Search ...</SearchBar>
+          <SubProductsListView> {children}</SubProductsListView>
         </SubproductsProvider>
       </Body>
 

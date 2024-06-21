@@ -12,9 +12,9 @@ const ProductsListView = ({ children }: { children: React.ReactNode }) => {
 
   const { handleToggleSelectedItem, selectedItem } = useToggleItem('products')
 
-  if (error) return <div>{error}</div>
-  if (isLoading) return <div>Loading...</div>
-  if (!allProducts || allProducts.length === 0) return <div>No Product to show!</div>
+  if (error) return <p>{error}</p>
+  if (isLoading) return <p>Loading...</p>
+  if (!allProducts || allProducts.length === 0) return <p>No Product to show!</p>
 
   return (
     <>
