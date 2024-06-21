@@ -34,7 +34,7 @@ const Subcategories = ({
       </Body>
 
       <Footer>
-        <Button Icon={PlusIcon}>Add Product</Button>
+        <Button Icon={PlusIcon}>Add Subcategory</Button>
       </Footer>
     </Container>
   )
