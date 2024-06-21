@@ -15,6 +15,9 @@ export const toggleItemReducer = (state: State, action: Action): State => {
         },
       }
     }
+    case 'RESET_FORM_STATE': {
+      return { ...state, selectedItems: {} }
+    }
     default:
       return state
   }

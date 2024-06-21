@@ -3,10 +3,10 @@ import { useToggleItemContext } from '@/context/ToggleItemContext/ToggleItemProv
 
 type GroupType = 'products' | 'subcategories' | 'subproducts'
 
-export const useToggleItem = (group: GroupType) => {
+export const useToggleItem = (group = '' as GroupType) => {
   const {
     dispatch,
-    toggleState: { selectedItems },
+    selectedInputs: { selectedItems },
   } = useToggleItemContext()
 
   const handleToggleSelectedItem = useCallback(
@@ -16,5 +16,15 @@ export const useToggleItem = (group: GroupType) => {
     [dispatch, group]
   )
 
-  return { handleToggleSelectedItem, selectedItem: selectedItems[group] }
+  const handleCloseAllForms = useCallback(() => {
+    dispatch({
+      type: 'RESET_FORM_STATE',
+      payload: {
+        group: '',
+        item: '',
+      },
+    })
+  }, [dispatch, group])
+
+  return { handleToggleSelectedItem, selectedItem: selectedItems[group], handleCloseAllForms }
 }

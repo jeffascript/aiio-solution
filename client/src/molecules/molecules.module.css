@@ -1,3 +1,7 @@
+/*==================================== 
+    Form Inputs  styles
+=====================================*/
+
 .form {
   width: 100%;
 }
@@ -74,9 +78,10 @@
 }
 
 .form__checkboxContainer--last {
-  border-top: 1px solid rgb(248, 252, 254);
-  border-bottom: 1px solid rgb(248, 252, 254);
+  border-top: 0.2px solid rgb(248, 252, 254);
+  border-bottom: 0.2px solid rgb(248, 252, 254);
   background-color: rgb(223, 228, 229);
+  box-shadow: var(--box-shadow);
 }
 
 .form__footer {
@@ -98,4 +103,94 @@
 
 .form__buttonText {
   text-transform: uppercase;
+}
+
+/*==================================== 
+    Modal  styles
+=====================================*/
+
+.modal__overlay {
+  background: #070707d1 !important;
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  text-align: center;
+  text-shadow: none;
+  top: 0;
+  z-index: 600;
+}
+
+.modal__wrap {
+  padding: 1.2rem 0;
+  position: relative;
+  margin: 0 auto;
+  max-width: 450px;
+  width: 30%;
+
+  margin: 40vmin auto;
+
+  /* border-radius: 15px; */
+  box-shadow: var(--box-shadow);
+  transition: all 0.2s;
+
+  background: var(--grey-white);
+}
+
+.modal__overlay {
+  opacity: 0;
+  transform: scale(0.5);
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  z-index: -100;
+}
+
+.modal__overlay-show {
+  opacity: 1;
+  transform: scale(1.5);
+  z-index: 800;
+  background: var(--overlay-color);
+  margin-block: -9%;
+  margin-bottom: 2%;
+}
+
+.modal__content {
+  padding: 0 0.4rem;
+  text-align: justify;
+}
+
+.modal__button-save {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--primary-color);
+  text-transform: uppercase;
+}
+
+.modal__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 3rem;
+}
+
+@media (min-width: 50em) {
+  .modal__wrap {
+    padding: 1.75em;
+  }
+
+  .modal__item {
+    text-align: justify;
+  }
+}
+@media (min-height: 37.5em) {
+  .modal__wrap {
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -100%);
+    margin: 25vmin auto;
+    max-width: calc(var(--max-width) * 20%);
+    width: calc(50% * 0.3);
+    margin-left: 1rem;
+  }
 }

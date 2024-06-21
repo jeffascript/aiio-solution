@@ -21,6 +21,6 @@
 
 @media (min-width: 600px) {
   .main__container-shell {
-    max-width: 550px; /* 550px 45% ?*/
+    max-width: var(--max-width); /* 550px 45% ?*/
   }
 }

@@ -46,3 +46,19 @@ export interface SubproductsContext {
   setFilteredSubProducts: React.Dispatch<React.SetStateAction<Subproduct[]>>
   handleSubproductSearch: (query: string) => void
 }
+
+export type AllData = Record<
+  keyof Products | keyof SubCategories | keyof Subproducts,
+  Record<string, boolean>
+>
+
+export type DoneResultAsNode = {
+  [key: string]: {
+    [key: string]: string[]
+  }[]
+}
+export type DoneResult = {
+  selectedSubproducts: string[]
+  selectedSubcategories: string[]
+  selectedProducts: string[]
+}

@@ -6,6 +6,9 @@
   --grey-color: #9c9c9c;
   --light-grey-color: #57575a;
   --accent-color: #0094bb;
+  --max-width: 550px;
+  --grey-white: #e8e4e4;
+  --box-shadow: 10px 10px 30px 5px rgb(27 56 79 / 15%), 10px 10px 30px 5px rgb(255 255 255 / 60%);
 }
 
 :root {

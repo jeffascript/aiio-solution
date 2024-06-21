@@ -9,13 +9,23 @@ import ProductsListView from './ProductsListView'
 
 import { ProductsProvider } from '@/context/ProductsContext'
 import { getStyleToken } from '@/utils/token'
+import { useToggleItemContext } from '@/context/ToggleItemContext'
 
 const Products = ({ children }: { children: React.ReactNode }) => {
+  const { toggleModal, getAllSelectedData } = useToggleItemContext()
+
   return (
     <Container backgroundColor={getStyleToken('primaryColor')}>
       <Header>
         <HeaderTitle>Products</HeaderTitle>
-        <Button onClick={() => console.log('hello')}>Done</Button>
+        <Button
+          onClick={() => {
+            getAllSelectedData()
+            toggleModal()
+          }}
+        >
+          Done
+        </Button>
       </Header>
 
       <Body>
