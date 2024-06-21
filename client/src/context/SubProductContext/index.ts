@@ -1,1 +1,1 @@
-export * from './SubcategoryProvider'
+export * from './SubproductsProvider'

@@ -11,6 +11,11 @@ import SubProductsListView from './SubProductsListView'
 import HeaderIcon from '@/molecules/HeaderIcon'
 import { SubproductsProvider } from '@/context/SubProductContext'
 import { getStyleToken } from '@/utils/token'
+import CheckboxInput from '@/atoms/CheckboxInput'
+import { useProductsContext } from '@/context/ProductsContext'
+import { useNewItems } from '@/hooks/useNewItems'
+import ConditionalRender from '@/molecules/ConditionalRender'
+import NewItemForm from '@/molecules/NewItemForm'
 
 const SubProducts = ({
   children,
@@ -19,6 +24,14 @@ const SubProducts = ({
   children?: React.ReactNode
   subCategoryId: number
 }) => {
+  const { isNewItemFormOpen, setIsNewItemFormOpen, value, setValue, newItem, handleNewItem } =
+    useNewItems(subCategoryId)
+
+  const { refetch } = useProductsContext()
+  // subProductId= filteredSubProducts.length - 1
+  // subProductName={e.target.value}
+  // subCategoryId=props.selectedSubcategoryId
+
   return (
     <Container backgroundColor={getStyleToken('greyColor')}>
       <Header>
@@ -30,13 +43,36 @@ const SubProducts = ({
         <SubproductsProvider selectedSubcategoryId={subCategoryId}>
           <SearchBar type="subproducts">Search ...</SearchBar>
           <SubProductsListView> {children}</SubProductsListView>
+          {newItem &&
+            newItem.length > 0 &&
+            newItem.map((item) => (
+              <React.Fragment
+                key={`${item.subCategoryId}-${item.subProductId}-${item.subProductName}`}
+              >
+                <CheckboxInput
+                  id={`${item.subCategoryId}-${item.subProductId}-${item.subProductName}`}
+                  label={item.subProductName as string}
+                  name={item.subProductName as string}
+                />
+              </React.Fragment>
+            ))}
+
+          <ConditionalRender condition={isNewItemFormOpen}>
+            <NewItemForm
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
+              onAdd={handleNewItem}
+            />
+          </ConditionalRender>
         </SubproductsProvider>
       </Body>
 
       <Footer>
-        <Button onClick={() => console.log('hello ')} Icon={PlusIcon}>
-          Add Product
-        </Button>
+        <ConditionalRender condition={!isNewItemFormOpen}>
+          <Button onClick={() => setIsNewItemFormOpen(!isNewItemFormOpen)} Icon={PlusIcon}>
+            Add Sub-Product
+          </Button>
+        </ConditionalRender>
       </Footer>
     </Container>
   )

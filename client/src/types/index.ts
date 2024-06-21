@@ -33,6 +33,7 @@ export type ProductsContext = {
   allSubproducts: Subproduct[]
   isLoading: boolean
   error: string | null
+  refetch: () => void
 }
 
 export interface SubcatergoriesContext {

@@ -12,7 +12,7 @@ const ProductsProvider = ({ children }: { children: React.ReactNode }) => {
   // It has a cache to store the data, to avoid multiple API calls.
   // The hook returns the data in an array (sequentially due to promise.all), loading state, and error,
   // and refetch method(skip the cache).
-  const { data, isLoading, error } = useFetchWithCache<Array<Record<string, unknown>>>([
+  const { data, isLoading, error, refetch } = useFetchWithCache<Array<Record<string, unknown>>>([
     '/data/products.json',
     '/data/subcategories.json',
     '/data/subproducts.json',
@@ -31,8 +31,9 @@ const ProductsProvider = ({ children }: { children: React.ReactNode }) => {
       allSubproducts: subProductResponse?.subproducts || [],
       isLoading,
       error,
+      refetch,
     }),
-    [productsResponse, subCategoryResponse, subProductResponse, isLoading, error]
+    [productsResponse, subCategoryResponse, subProductResponse, isLoading, error, refetch]
   )
 
   return <ProductsProviderBase value={productsContextValues}>{children}</ProductsProviderBase>

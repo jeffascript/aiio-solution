@@ -43,6 +43,10 @@ const SubproductsProvider = ({
     [initialFilteredSubProducts]
   )
 
+  // subProductId= filteredSubProducts.length - 1
+  // subProductName={e.target.value}
+  // subCategoryId=props.selectedSubcategoryId
+
   const memoizedSubproductContextValues = useMemo(
     () => ({
       filteredSubProducts,
