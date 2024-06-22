@@ -1,10 +1,13 @@
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import type { Subproduct, SubproductsContext } from '@/types'
 import { createGenericContext } from '@/hooks/useGenericContext'
 import { useProductsContext } from '@/context/ProductsContext'
 import { useNewItems } from '@/hooks/useNewItems'
 import usePostData from '@/hooks/usePostData'
 import { API_CONFIG } from '@/utils/config'
+import { useFilteredItems } from '@/hooks/useFilteredItems'
+import { useItemSearch } from '@/hooks/useItemSearch'
+import { useAddNewItem } from '@/hooks/useAddNewItem'
 
 const [useSubproductsContext, SubproductsProviderBase] = createGenericContext<SubproductsContext>()
 
@@ -15,74 +18,56 @@ const SubproductsProvider: React.FC<{
   const { allSubproducts, updateCacheKeySuffixForRefetchingData } = useProductsContext()
   const { postData } = usePostData()
 
-  const getFilteredSubProductsBySubcategoryId = useCallback((): Subproduct[] => {
-    return selectedSubcategoryId
-      ? allSubproducts.filter(({ subCategoryId }) => subCategoryId === selectedSubcategoryId)
-      : []
-  }, [allSubproducts, selectedSubcategoryId])
+  const {
+    allItemsState: allSubProductsState,
+    setAllItemsState: setAllSubProductsState,
+    filteredItems: filteredSubProducts,
+    setFilteredItems: setFilteredSubProducts,
+  } = useFilteredItems<Subproduct>(allSubproducts, selectedSubcategoryId, 'subCategoryId')
 
-  const initialFilteredSubProducts = useMemo(getFilteredSubProductsBySubcategoryId, [
-    getFilteredSubProductsBySubcategoryId,
-  ])
-
-  const [allSubProductsState, setAllSubProductsState] = useState<Subproduct[]>(
-    initialFilteredSubProducts
+  const handleSubproductSearch = useItemSearch<Subproduct>(
+    allSubProductsState,
+    setFilteredSubProducts,
+    'subProductName'
   )
-  const [filteredSubProducts, setFilteredSubProducts] = useState<Subproduct[]>(
-    initialFilteredSubProducts
+
+  const handleAddNewSubproduct = useAddNewItem<Subproduct>(
+    allSubProductsState,
+    setAllSubProductsState,
+    setFilteredSubProducts,
+    selectedSubcategoryId,
+    'subProductId'
   )
 
   const { isNewItemFormOpen, setIsNewItemFormOpen, inputValue, setInputValue } = useNewItems()
 
-  const handleSubproductSearch = useCallback(
-    (query: string) => {
-      const lowerCaseQuery = query.toLowerCase()
-      setFilteredSubProducts(
-        allSubProductsState.filter(({ subProductName }) =>
-          subProductName.toLowerCase().includes(lowerCaseQuery)
-        )
-      )
-    },
-    [allSubProductsState]
-  )
-
-  const handleAddNewSubproduct = useCallback(
-    (value: string) => {
-      const newSubProduct = {
-        subProductId: allSubProductsState.length,
-        subProductName: value,
-        subCategoryId: selectedSubcategoryId,
-      }
-
-      setAllSubProductsState((prev) => [...prev, newSubProduct])
-      setFilteredSubProducts((prev) => [...prev, newSubProduct])
-    },
-    [allSubProductsState, selectedSubcategoryId]
-  )
-
   const handleNewItem = useCallback(() => {
     if (!inputValue) return setIsNewItemFormOpen(false)
 
-    // 💡 optimistical UI update.
-    // the new subproduct item gets added instantly
-    // without waiting for the api call to resolve.
+    // Optimistic UI update
     handleAddNewSubproduct(inputValue)
 
     setInputValue('')
     setIsNewItemFormOpen(false)
-    // hook for POST of the new item created
+
+    // POST the new item
     postData(API_CONFIG.SUBPRODUCTS_URL, {
       subProductName: inputValue,
       subCategoryId: selectedSubcategoryId,
     }).then(() =>
       updateCacheKeySuffixForRefetchingData(
-        // creating a unique str in order to
-        // append & bypass the cache and refetch new data
-        // so as to keep the state in sync with the server (after the optimistic UI update)
         `${selectedSubcategoryId}-${selectedSubcategoryId}-${inputValue.charAt(0)}`
       )
     )
-  }, [inputValue, handleAddNewSubproduct, setIsNewItemFormOpen, setInputValue])
+  }, [
+    inputValue,
+    handleAddNewSubproduct,
+    setIsNewItemFormOpen,
+    setInputValue,
+    postData,
+    selectedSubcategoryId,
+    updateCacheKeySuffixForRefetchingData,
+  ])
 
   const memoizedSubproductContextValues = useMemo(
     () => ({
