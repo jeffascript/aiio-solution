@@ -1,4 +1,4 @@
-import { createContext, useContext, ReactNode } from 'react'
+import React, { createContext, useContext, ReactNode } from 'react'
 
 export function createGenericContext<T>() {
   const context = createContext<T | null>(null)
@@ -12,7 +12,6 @@ export function createGenericContext<T>() {
   }
 
   const Provider = ({ value, children }: { value: T; children: ReactNode }) => {
-    // eslint-disable-next-line react/react-in-jsx-scope
     return <context.Provider value={value}>{children}</context.Provider>
   }
 
