@@ -7,6 +7,7 @@ export const useFetchWithCache = <T extends Array<Record<string, unknown>>>(
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [data, setData] = useState<T | null>(null)
+  const [cacheKeySuffix, setCacheKeySuffix] = useState<string>('')
 
   const cache = useRef<Record<string, T>>({})
 
@@ -15,7 +16,7 @@ export const useFetchWithCache = <T extends Array<Record<string, unknown>>>(
       setIsLoading(true)
       setError(null)
       try {
-        const cacheKey = urls.join(',')
+        const cacheKey = `${urls.join(',')}${cacheKeySuffix}`
         if (cache.current[cacheKey] && !skipCache) {
           const cachedData = cache.current[cacheKey]
           console.log('cache', cache.current)
@@ -42,12 +43,20 @@ export const useFetchWithCache = <T extends Array<Record<string, unknown>>>(
         setIsLoading(false)
       }
     },
-    [urls, callback]
+    [urls, callback, cacheKeySuffix]
   )
 
   useEffect(() => {
     fetchData()
   }, [fetchData])
 
-  return { data, isLoading, error, refetch: () => fetchData(true) }
+  const refetch = useCallback(() => {
+    fetchData(true)
+  }, [fetchData])
+
+  const updateCacheKeySuffixForRefetchingData = useCallback((suffix: string) => {
+    setCacheKeySuffix(suffix)
+  }, [])
+
+  return { data, isLoading, error, refetch, updateCacheKeySuffixForRefetchingData }
 }

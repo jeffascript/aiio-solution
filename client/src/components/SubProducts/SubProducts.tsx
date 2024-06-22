@@ -17,7 +17,7 @@ import NewItemForm from '@/molecules/NewItemForm'
 import { useSubproductsContext } from '@/context/SubProductContext'
 
 const SubProductsBody = ({ children }: { children: React.ReactNode }) => {
-  const { isNewItemFormOpen, value, setValue, handleNewItem } = useSubproductsContext()
+  const { isNewItemFormOpen, inputValue, setInputValue, handleNewItem } = useSubproductsContext()
 
   return (
     <Body>
@@ -25,8 +25,8 @@ const SubProductsBody = ({ children }: { children: React.ReactNode }) => {
       <SubProductsListView>{children}</SubProductsListView>
       <ConditionalRender condition={isNewItemFormOpen}>
         <NewItemForm
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
           onAdd={handleNewItem}
         />
       </ConditionalRender>

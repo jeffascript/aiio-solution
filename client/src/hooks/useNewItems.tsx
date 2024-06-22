@@ -5,13 +5,13 @@ import useInput from './useInput'
 export const useNewItems = () => {
   const [isNewItemFormOpen, setIsNewItemFormOpen] = useState(false)
   const [newItem] = useState<Array<Record<string, number | string>>>([])
-  const { value, setValue } = useInput('')
+  const { value: inputValue, setValue: setInputValue } = useInput('')
 
   return {
     isNewItemFormOpen,
-    value,
+    inputValue,
     newItem,
     setIsNewItemFormOpen,
-    setValue,
+    setInputValue,
   }
 }

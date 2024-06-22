@@ -3,17 +3,17 @@ import type { Subproduct, SubproductsContext } from '@/types'
 import { createGenericContext } from '@/hooks/useGenericContext'
 import { useProductsContext } from '@/context/ProductsContext'
 import { useNewItems } from '@/hooks/useNewItems'
+import usePostData from '@/hooks/usePostData'
+import { API_CONFIG } from '@/utils/config'
 
 const [useSubproductsContext, SubproductsProviderBase] = createGenericContext<SubproductsContext>()
 
-const SubproductsProvider = ({
-  children,
-  selectedSubcategoryId,
-}: {
+const SubproductsProvider: React.FC<{
   children: React.ReactNode
   selectedSubcategoryId: number
-}) => {
-  const { allSubproducts } = useProductsContext()
+}> = ({ children, selectedSubcategoryId }) => {
+  const { allSubproducts, updateCacheKeySuffixForRefetchingData } = useProductsContext()
+  const { postData } = usePostData()
 
   const getFilteredSubProductsBySubcategoryId = useCallback((): Subproduct[] => {
     return selectedSubcategoryId
@@ -25,9 +25,6 @@ const SubproductsProvider = ({
     getFilteredSubProductsBySubcategoryId,
   ])
 
-  // State hook for managing the fetched subproduct data & filtering it based on the selected subcategory.
-  // the selected subcategory also matches the subcategory id of the subproduct
-
   const [allSubProductsState, setAllSubProductsState] = useState<Subproduct[]>(
     initialFilteredSubProducts
   )
@@ -35,7 +32,7 @@ const SubproductsProvider = ({
     initialFilteredSubProducts
   )
 
-  const { isNewItemFormOpen, setIsNewItemFormOpen, value, setValue } = useNewItems()
+  const { isNewItemFormOpen, setIsNewItemFormOpen, inputValue, setInputValue } = useNewItems()
 
   const handleSubproductSearch = useCallback(
     (query: string) => {
@@ -64,13 +61,28 @@ const SubproductsProvider = ({
   )
 
   const handleNewItem = useCallback(() => {
-    if (!value) return setIsNewItemFormOpen(false)
+    if (!inputValue) return setIsNewItemFormOpen(false)
 
-    handleAddNewSubproduct(value)
+    // 💡 optimistical UI update.
+    // the new subproduct item gets added instantly
+    // without waiting for the api call to resolve.
+    handleAddNewSubproduct(inputValue)
 
-    setValue('')
+    setInputValue('')
     setIsNewItemFormOpen(false)
-  }, [value, handleAddNewSubproduct, setIsNewItemFormOpen, setValue])
+    // hook for POST of the new item created
+    postData(API_CONFIG.SUBPRODUCTS_URL, {
+      subProductName: inputValue,
+      subCategoryId: selectedSubcategoryId,
+    }).then(() =>
+      updateCacheKeySuffixForRefetchingData(
+        // creating a unique str in order to
+        // append & bypass the cache and refetch new data
+        // so as to keep the state in sync with the server (after the optimistic UI update)
+        `${selectedSubcategoryId}-${selectedSubcategoryId}-${inputValue.charAt(0)}`
+      )
+    )
+  }, [inputValue, handleAddNewSubproduct, setIsNewItemFormOpen, setInputValue])
 
   const memoizedSubproductContextValues = useMemo(
     () => ({
@@ -80,8 +92,8 @@ const SubproductsProvider = ({
       handleNewItem,
       isNewItemFormOpen,
       setIsNewItemFormOpen,
-      value,
-      setValue,
+      inputValue,
+      setInputValue,
     }),
     [
       filteredSubProducts,
@@ -90,8 +102,8 @@ const SubproductsProvider = ({
       handleNewItem,
       isNewItemFormOpen,
       setIsNewItemFormOpen,
-      value,
-      setValue,
+      inputValue,
+      setInputValue,
     ]
   )
 

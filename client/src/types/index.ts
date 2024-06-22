@@ -33,7 +33,7 @@ export type ProductsContext = {
   allSubproducts: Subproduct[]
   isLoading: boolean
   error: string | null
-  refetch: () => void
+  updateCacheKeySuffixForRefetchingData: (suffix: string) => void
 }
 
 export interface SubcatergoriesContext {
@@ -46,11 +46,10 @@ export interface SubproductsContext {
   filteredSubProducts: Array<Subproduct>
   setFilteredSubProducts: React.Dispatch<React.SetStateAction<Subproduct[]>>
   handleSubproductSearch: (query: string) => void
-  //
   isNewItemFormOpen: boolean
   setIsNewItemFormOpen: React.Dispatch<React.SetStateAction<boolean>>
-  value: string
-  setValue: React.Dispatch<React.SetStateAction<string>>
+  inputValue: string
+  setInputValue: React.Dispatch<React.SetStateAction<string>>
   handleNewItem: () => void
 }
 

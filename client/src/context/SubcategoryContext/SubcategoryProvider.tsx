@@ -7,13 +7,10 @@ import { useProductsContext } from '@/context/ProductsContext'
 const [useSubcatergoriesContext, SubcatergoriesProviderBase] =
   createGenericContext<SubcatergoriesContext>()
 
-const SubcatergoriesProvider = ({
-  children,
-  selectedProductId,
-}: {
+const SubcatergoriesProvider: React.FC<{
   children: React.ReactNode
   selectedProductId: number | null
-}) => {
+}> = ({ children, selectedProductId }) => {
   const { allSubcategories } = useProductsContext()
 
   const getFilteredSubcategories = useCallback(() => {
