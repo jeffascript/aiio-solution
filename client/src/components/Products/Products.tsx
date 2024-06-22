@@ -11,32 +11,46 @@ import { ProductsProvider } from '@/context/ProductsContext'
 import { getStyleToken } from '@/utils/token'
 import { useToggleItemContext } from '@/context/ToggleItemContext'
 
-const Products = ({ children }: { children: React.ReactNode }) => {
+const ProductsHeader = ({ children }: { children: React.ReactNode }) => {
   const { toggleModal, getAllSelectedData } = useToggleItemContext()
 
   return (
+    <Header>
+      <HeaderTitle>{children}</HeaderTitle>
+      <Button
+        onClick={() => {
+          getAllSelectedData()
+          toggleModal()
+        }}
+      >
+        Done
+      </Button>
+    </Header>
+  )
+}
+
+const ProductsBody = ({ children }: { children: React.ReactNode }) => (
+  <Body>
+    <ProductsProvider>
+      <ProductsListView>{children}</ProductsListView>
+    </ProductsProvider>
+  </Body>
+)
+
+const ProductsFooter = ({ children }: { children: React.ReactNode }) => (
+  <Footer>
+    <Button Icon={PlusIcon}>{children}</Button>
+  </Footer>
+)
+
+const Products: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
+  return (
     <Container backgroundColor={getStyleToken('primaryColor')}>
-      <Header>
-        <HeaderTitle>Products</HeaderTitle>
-        <Button
-          onClick={() => {
-            getAllSelectedData()
-            toggleModal()
-          }}
-        >
-          Done
-        </Button>
-      </Header>
-
-      <Body>
-        <ProductsProvider>
-          <ProductsListView> {children}</ProductsListView>
-        </ProductsProvider>
-      </Body>
-
-      <Footer>
-        <Button Icon={PlusIcon}>Add Product</Button>
-      </Footer>
+      <ProductsProvider>
+        <ProductsHeader>Products</ProductsHeader>
+        <ProductsBody>{children}</ProductsBody>
+        <ProductsFooter>Add Product</ProductsFooter>
+      </ProductsProvider>
     </Container>
   )
 }

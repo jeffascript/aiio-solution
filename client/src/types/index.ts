@@ -46,6 +46,12 @@ export interface SubproductsContext {
   filteredSubProducts: Array<Subproduct>
   setFilteredSubProducts: React.Dispatch<React.SetStateAction<Subproduct[]>>
   handleSubproductSearch: (query: string) => void
+  //
+  isNewItemFormOpen: boolean
+  setIsNewItemFormOpen: React.Dispatch<React.SetStateAction<boolean>>
+  value: string
+  setValue: React.Dispatch<React.SetStateAction<string>>
+  handleNewItem: () => void
 }
 
 export type AllData = Record<

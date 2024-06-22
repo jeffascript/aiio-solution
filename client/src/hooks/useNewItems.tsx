@@ -1,23 +1,11 @@
 import { useState } from 'react'
 import useInput from './useInput'
 
-export const useNewItems = (subCategoryId: number) => {
+// The hook manages the state and behavior for adding new items to a subproduct.
+export const useNewItems = () => {
   const [isNewItemFormOpen, setIsNewItemFormOpen] = useState(false)
-  const [newItem, setNewItem] = useState<Array<Record<string, number | string>>>([])
+  const [newItem] = useState<Array<Record<string, number | string>>>([])
   const { value, setValue } = useInput('')
-
-  const handleNewItem = () => {
-    setNewItem((prev) => [
-      ...prev,
-      {
-        subProductId: prev.length - 1,
-        subProductName: value,
-        subCategoryId,
-      },
-    ])
-    setValue('')
-    setIsNewItemFormOpen(false)
-  }
 
   return {
     isNewItemFormOpen,
@@ -25,6 +13,5 @@ export const useNewItems = (subCategoryId: number) => {
     newItem,
     setIsNewItemFormOpen,
     setValue,
-    handleNewItem,
   }
 }

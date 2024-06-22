@@ -11,69 +11,61 @@ import SubProductsListView from './SubProductsListView'
 import HeaderIcon from '@/molecules/HeaderIcon'
 import { SubproductsProvider } from '@/context/SubProductContext'
 import { getStyleToken } from '@/utils/token'
-import CheckboxInput from '@/atoms/CheckboxInput'
-import { useProductsContext } from '@/context/ProductsContext'
-import { useNewItems } from '@/hooks/useNewItems'
+
 import ConditionalRender from '@/molecules/ConditionalRender'
 import NewItemForm from '@/molecules/NewItemForm'
+import { useSubproductsContext } from '@/context/SubProductContext'
 
-const SubProducts = ({
-  children,
-  subCategoryId,
-}: {
-  children?: React.ReactNode
-  subCategoryId: number
-}) => {
-  const { isNewItemFormOpen, setIsNewItemFormOpen, value, setValue, newItem, handleNewItem } =
-    useNewItems(subCategoryId)
-
-  const { refetch } = useProductsContext()
-  // subProductId= filteredSubProducts.length - 1
-  // subProductName={e.target.value}
-  // subCategoryId=props.selectedSubcategoryId
+const SubProductsBody = ({ children }: { children: React.ReactNode }) => {
+  const { isNewItemFormOpen, value, setValue, handleNewItem } = useSubproductsContext()
 
   return (
+    <Body>
+      <SearchBar type="subproducts">Search ...</SearchBar>
+      <SubProductsListView>{children}</SubProductsListView>
+      <ConditionalRender condition={isNewItemFormOpen}>
+        <NewItemForm
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          onAdd={handleNewItem}
+        />
+      </ConditionalRender>
+    </Body>
+  )
+}
+
+const SubProductsHeader = ({ children }: { children: React.ReactNode }) => (
+  <Header>
+    <HeaderTitle>{children}</HeaderTitle>
+    <HeaderIcon />
+  </Header>
+)
+
+const SubProductsFooter = ({ children }: { children: React.ReactNode }) => {
+  const { isNewItemFormOpen, setIsNewItemFormOpen } = useSubproductsContext()
+
+  return (
+    <Footer>
+      <ConditionalRender condition={!isNewItemFormOpen}>
+        <Button onClick={() => setIsNewItemFormOpen(true)} Icon={PlusIcon}>
+          {children}
+        </Button>
+      </ConditionalRender>
+    </Footer>
+  )
+}
+
+const SubProducts: React.FC<{ children?: React.ReactNode; subCategoryId: number }> = ({
+  children,
+  subCategoryId,
+}) => {
+  return (
     <Container backgroundColor={getStyleToken('greyColor')}>
-      <Header>
-        <HeaderTitle>Select Sub-Products</HeaderTitle>
-        <HeaderIcon />
-      </Header>
-
-      <Body>
-        <SubproductsProvider selectedSubcategoryId={subCategoryId}>
-          <SearchBar type="subproducts">Search ...</SearchBar>
-          <SubProductsListView> {children}</SubProductsListView>
-          {newItem &&
-            newItem.length > 0 &&
-            newItem.map((item) => (
-              <React.Fragment
-                key={`${item.subCategoryId}-${item.subProductId}-${item.subProductName}`}
-              >
-                <CheckboxInput
-                  id={`${item.subCategoryId}-${item.subProductId}-${item.subProductName}`}
-                  label={item.subProductName as string}
-                  name={item.subProductName as string}
-                />
-              </React.Fragment>
-            ))}
-
-          <ConditionalRender condition={isNewItemFormOpen}>
-            <NewItemForm
-              value={value}
-              onChange={(e) => setValue(e.target.value)}
-              onAdd={handleNewItem}
-            />
-          </ConditionalRender>
-        </SubproductsProvider>
-      </Body>
-
-      <Footer>
-        <ConditionalRender condition={!isNewItemFormOpen}>
-          <Button onClick={() => setIsNewItemFormOpen(!isNewItemFormOpen)} Icon={PlusIcon}>
-            Add Sub-Product
-          </Button>
-        </ConditionalRender>
-      </Footer>
+      <SubproductsProvider selectedSubcategoryId={subCategoryId}>
+        <SubProductsHeader>Select Sub-Products</SubProductsHeader>
+        <SubProductsBody>{children}</SubProductsBody>
+        <SubProductsFooter>Add Sub-Product </SubProductsFooter>
+      </SubproductsProvider>
     </Container>
   )
 }

@@ -12,30 +12,39 @@ import HeaderIcon from '@/molecules/HeaderIcon'
 import { SubcatergoriesProvider } from '@/context/SubcategoryContext'
 import { getStyleToken } from '@/utils/token'
 
-const Subcategories = ({
+const SubcategoriesHeader = ({ children }: { children: React.ReactNode }) => (
+  <Header>
+    <HeaderTitle>{children}</HeaderTitle>
+    <HeaderIcon />
+  </Header>
+)
+
+const SubcategoriesBody = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <Body>
+      <SearchBar type="subcategories">Search ...</SearchBar>
+      <SubcategoriesListView>{children}</SubcategoriesListView>
+    </Body>
+  )
+}
+
+const SubcategoriesFooter = ({ children }: { children: React.ReactNode }) => (
+  <Footer>
+    <Button Icon={PlusIcon}>{children}</Button>
+  </Footer>
+)
+
+const Subcategories: React.FC<{ children?: React.ReactNode; selectedProductId: number | null }> = ({
   children,
   selectedProductId,
-}: {
-  children?: React.ReactNode
-  selectedProductId: number | null
 }) => {
   return (
     <Container backgroundColor={getStyleToken('darkerColor')}>
-      <Header>
-        <HeaderTitle>Select Categories</HeaderTitle>
-        <HeaderIcon />
-      </Header>
-
-      <Body>
-        <SubcatergoriesProvider selectedProductId={selectedProductId}>
-          <SearchBar type="subcategories">Search ...</SearchBar>
-          <SubcategoriesListView> {children}</SubcategoriesListView>
-        </SubcatergoriesProvider>
-      </Body>
-
-      <Footer>
-        <Button Icon={PlusIcon}>Add Subcategory</Button>
-      </Footer>
+      <SubcatergoriesProvider selectedProductId={selectedProductId}>
+        <SubcategoriesHeader> Select Categories </SubcategoriesHeader>
+        <SubcategoriesBody>{children}</SubcategoriesBody>
+        <SubcategoriesFooter> Add Category</SubcategoriesFooter>
+      </SubcatergoriesProvider>
     </Container>
   )
 }
