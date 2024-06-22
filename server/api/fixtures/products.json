@@ -1,0 +1,16 @@
+[
+  {
+    "model": "api.product",
+    "pk": 1,
+    "fields": {
+      "productName": "Electric Motors"
+    }
+  },
+  {
+    "model": "api.product",
+    "pk": 2,
+    "fields": {
+      "productName": "Communication Equipment"
+    }
+  }
+]

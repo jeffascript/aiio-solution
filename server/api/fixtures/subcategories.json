@@ -1,0 +1,82 @@
+[
+  {
+    "model": "api.subcategory",
+    "pk": 1,
+    "fields": {
+      "productId": 1,
+      "subCategoryName": "Bearings"
+    }
+  },
+  {
+    "model": "api.subcategory",
+    "pk": 2,
+    "fields": {
+      "productId": 1,
+      "subCategoryName": "Current Collectors"
+    }
+  },
+  {
+    "model": "api.subcategory",
+    "pk": 3,
+    "fields": {
+      "productId": 1,
+      "subCategoryName": "Fans and Fan impellers"
+    }
+  },
+  {
+    "model": "api.subcategory",
+    "pk": 4,
+    "fields": {
+      "productId": 1,
+      "subCategoryName": "Insulators"
+    }
+  },
+  {
+    "model": "api.subcategory",
+    "pk": 5,
+    "fields": {
+      "productId": 1,
+      "subCategoryName": "Rotars and Stators"
+    }
+  },
+  {
+    "model": "api.subcategory",
+    "pk": 6,
+    "fields": {
+      "productId": 2,
+      "subCategoryName": "Bearings"
+    }
+  },
+  {
+    "model": "api.subcategory",
+    "pk": 7,
+    "fields": {
+      "productId": 2,
+      "subCategoryName": "Current Collectors"
+    }
+  },
+  {
+    "model": "api.subcategory",
+    "pk": 8,
+    "fields": {
+      "productId": 2,
+      "subCategoryName": "Fans and Fan impellers"
+    }
+  },
+  {
+    "model": "api.subcategory",
+    "pk": 9,
+    "fields": {
+      "productId": 2,
+      "subCategoryName": "Insulators"
+    }
+  },
+  {
+    "model": "api.subcategory",
+    "pk": 10,
+    "fields": {
+      "productId": 2,
+      "subCategoryName": "Rotars and Stators"
+    }
+  }
+]

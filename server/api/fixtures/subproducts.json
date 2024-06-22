@@ -1,0 +1,162 @@
+[
+  {
+    "model": "api.subproduct",
+    "pk": 1,
+    "fields": {
+      "subCategoryId": 1,
+      "subProductName": "Blue Collectors"
+    }
+  },
+  {
+    "model": "api.subproduct",
+    "pk": 2,
+    "fields": {
+      "subCategoryId": 1,
+      "subProductName": "Red Collectors"
+    }
+  },
+  {
+    "model": "api.subproduct",
+    "pk": 3,
+    "fields": {
+      "subCategoryId": 2,
+      "subProductName": "Yellow Collectors"
+    }
+  },
+  {
+    "model": "api.subproduct",
+    "pk": 4,
+    "fields": {
+      "subCategoryId": 2,
+      "subProductName": "White Collectors"
+    }
+  },
+  {
+    "model": "api.subproduct",
+    "pk": 5,
+    "fields": {
+      "subCategoryId": 3,
+      "subProductName": "Black Collectors"
+    }
+  },
+  {
+    "model": "api.subproduct",
+    "pk": 6,
+    "fields": {
+      "subCategoryId": 3,
+      "subProductName": "Green Collectors"
+    }
+  },
+  {
+    "model": "api.subproduct",
+    "pk": 7,
+    "fields": {
+      "subCategoryId": 4,
+      "subProductName": "Orange Collectors"
+    }
+  },
+  {
+    "model": "api.subproduct",
+    "pk": 8,
+    "fields": {
+      "subCategoryId": 4,
+      "subProductName": "Purple Collectors"
+    }
+  },
+  {
+    "model": "api.subproduct",
+    "pk": 9,
+    "fields": {
+      "subCategoryId": 5,
+      "subProductName": "Wheat Collectors"
+    }
+  },
+  {
+    "model": "api.subproduct",
+    "pk": 10,
+    "fields": {
+      "subCategoryId": 5,
+      "subProductName": "Current Collectors"
+    }
+  },
+  {
+    "model": "api.subproduct",
+    "pk": 11,
+    "fields": {
+      "subCategoryId": 6,
+      "subProductName": "Blue Collectors"
+    }
+  },
+  {
+    "model": "api.subproduct",
+    "pk": 12,
+    "fields": {
+      "subCategoryId": 6,
+      "subProductName": "Red Collectors"
+    }
+  },
+  {
+    "model": "api.subproduct",
+    "pk": 13,
+    "fields": {
+      "subCategoryId": 7,
+      "subProductName": "Yellow Collectors"
+    }
+  },
+  {
+    "model": "api.subproduct",
+    "pk": 14,
+    "fields": {
+      "subCategoryId": 7,
+      "subProductName": "White Collectors"
+    }
+  },
+  {
+    "model": "api.subproduct",
+    "pk": 15,
+    "fields": {
+      "subCategoryId": 8,
+      "subProductName": "Black Collectors"
+    }
+  },
+  {
+    "model": "api.subproduct",
+    "pk": 16,
+    "fields": {
+      "subCategoryId": 8,
+      "subProductName": "Green Collectors"
+    }
+  },
+  {
+    "model": "api.subproduct",
+    "pk": 17,
+    "fields": {
+      "subCategoryId": 9,
+      "subProductName": "Orange Collectors"
+    }
+  },
+  {
+    "model": "api.subproduct",
+    "pk": 18,
+    "fields": {
+      "subCategoryId": 9,
+      "subProductName": "Purple Collectors"
+    }
+  },
+  {
+    "model": "api.subproduct",
+    "pk": 19,
+    "fields": {
+      "subCategoryId": 10,
+      "subProductName": "Wheat Collectors"
+    }
+  },
+  {
+    "model": "api.subproduct",
+    "pk": 20,
+    "fields": {
+      "subCategoryId": 10,
+      "subProductName": "Current Collectors"
+    }
+  }
+]
