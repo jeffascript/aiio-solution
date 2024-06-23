@@ -1,1 +1,1 @@
-export { default as DoneShowcaseModal } from './DoneShowcaseModal'
+export { default as ModalDoneShowcase } from './ModalDoneShowcase'

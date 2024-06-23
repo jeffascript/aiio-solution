@@ -4,7 +4,7 @@ import { combineClassNames } from '@/utils/combineClassNames'
 import { useClickAway } from '@/hooks/useClickAway'
 import { useToggleItemContext } from '@/context/ToggleItemContext'
 
-export const Modal = ({ children }: { children: ReactNode }) => {
+export const ModalContainer = ({ children }: { children: ReactNode }) => {
   const { isModalOpen, setIsModalOpen } = useToggleItemContext()
 
   const modalRef = useClickAway<HTMLDivElement>(() => setIsModalOpen(false))

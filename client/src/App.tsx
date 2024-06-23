@@ -3,7 +3,7 @@ import React from 'react'
 import { Main } from '@/components/Main'
 import { Products } from '@/components/Products/Products'
 import { ToggleItemProvider } from '@/context/ToggleItemContext'
-import { DoneShowcaseModal } from '@/components/Modal'
+import { ModalDoneShowcase } from '@/components/Modal'
 
 const App: React.FC = () => {
   return (
@@ -14,7 +14,7 @@ const App: React.FC = () => {
           <Products.Body />
           <Products.Footer>Add Product</Products.Footer>
         </Products>
-        <DoneShowcaseModal />
+        <ModalDoneShowcase />
       </ToggleItemProvider>
     </Main>
   )
