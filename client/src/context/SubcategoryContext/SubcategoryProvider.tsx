@@ -1,59 +1,77 @@
-import React, { useCallback, useMemo, useState } from 'react'
-import type { SubcatergoriesContext, Subcategory } from '@/types'
+import React, { useCallback, useMemo } from 'react'
+import type { SubcategoriesContext } from '@/types'
 
 import { createGenericContext } from '@/hooks/useGenericContext'
 import { useProductsContext } from '@/context/ProductsContext'
+import { useNewItems } from '@/hooks/useNewItems'
+import { useSubcategoryActions } from './useSubcategoryActions'
+import { useSubcategoryInitialState } from './useSubcategoryInitialState'
 
-const [useSubcatergoriesContext, SubcatergoriesProviderBase] =
-  createGenericContext<SubcatergoriesContext>()
+const [useSubcatergoriesContext, SubcategoriesProviderBase] =
+  createGenericContext<SubcategoriesContext>()
 
-const SubcatergoriesProvider: React.FC<{
+const SubcategoriesProvider: React.FC<{
   children: React.ReactNode
-  selectedProductId: number | null
+  selectedProductId: number
 }> = ({ children, selectedProductId }) => {
   const { allSubcategories } = useProductsContext()
 
-  const getFilteredSubcategories = useCallback(() => {
-    return selectedProductId
-      ? allSubcategories.filter(({ productId }) => productId === selectedProductId)
-      : []
-  }, [selectedProductId, allSubcategories])
+  const {
+    allSubcategoriesState,
+    setAllSubcategoriesState,
+    filteredSubcategories,
+    setFilteredSubcategories,
+  } = useSubcategoryInitialState(allSubcategories, selectedProductId)
 
-  const initialFilteredSubcategories = useMemo(
-    () => getFilteredSubcategories(),
-    [getFilteredSubcategories]
+  const { isNewItemFormOpen, setIsNewItemFormOpen, inputValue, setInputValue } = useNewItems()
+
+  const { handleSubcategorySearch, addNewSubCategoryOptimistically } = useSubcategoryActions(
+    allSubcategoriesState,
+    setAllSubcategoriesState,
+    setFilteredSubcategories,
+    selectedProductId
   )
 
-  const [filteredSubcategories, setFilteredSubcategories] = useState<Subcategory[]>(
-    initialFilteredSubcategories
-  )
+  const handleNewSubCategory = useCallback(() => {
+    if (!inputValue) return setIsNewItemFormOpen(false)
 
-  const handleSubcategorySearch = useCallback(
-    (query: string) => {
-      const lowerCaseQuery = query.toLowerCase()
-      setFilteredSubcategories(
-        initialFilteredSubcategories.filter(({ subCategoryName }) =>
-          subCategoryName.toLowerCase().includes(lowerCaseQuery)
-        )
-      )
-    },
-    [initialFilteredSubcategories]
-  )
+    // 💡 optimistical UI update.
+    // the new subproduct item gets added instantly
+    // without waiting for the api call to resolve.
+    addNewSubCategoryOptimistically(inputValue)
+
+    setInputValue('')
+    setIsNewItemFormOpen(false)
+  }, [inputValue, addNewSubCategoryOptimistically, setIsNewItemFormOpen, setInputValue])
 
   const memoizedSubcategoryContextValues = useMemo(
     () => ({
       filteredSubcategories,
       setFilteredSubcategories,
       handleSubcategorySearch,
+      handleNewSubCategory,
+      isNewSubCategoryFormOpen: isNewItemFormOpen,
+      setIsNewSubCategoryFormOpen: setIsNewItemFormOpen,
+      inputValue,
+      setInputValue,
     }),
-    [filteredSubcategories, setFilteredSubcategories, handleSubcategorySearch]
+    [
+      filteredSubcategories,
+      setFilteredSubcategories,
+      handleSubcategorySearch,
+      handleNewSubCategory,
+      setIsNewItemFormOpen,
+      isNewItemFormOpen,
+      inputValue,
+      setInputValue,
+    ]
   )
 
   return (
-    <SubcatergoriesProviderBase value={memoizedSubcategoryContextValues}>
+    <SubcategoriesProviderBase value={memoizedSubcategoryContextValues}>
       {children}
-    </SubcatergoriesProviderBase>
+    </SubcategoriesProviderBase>
   )
 }
 
-export { SubcatergoriesProvider, useSubcatergoriesContext }
+export { SubcategoriesProvider, useSubcatergoriesContext }

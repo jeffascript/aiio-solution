@@ -1,10 +1,12 @@
-import React, { useCallback, useMemo, useState } from 'react'
-import type { Subproduct, SubproductsContext } from '@/types'
+import React, { useCallback, useMemo } from 'react'
+import type { SubproductsContext } from '@/types'
 import { createGenericContext } from '@/hooks/useGenericContext'
 import { useProductsContext } from '@/context/ProductsContext'
 import { useNewItems } from '@/hooks/useNewItems'
 import usePostData from '@/hooks/usePostData'
 import { API_CONFIG } from '@/utils/config'
+import { useSubproductActions } from './useSubProductActions'
+import { useSubproductsInitialState } from './useSubproductsInitialState'
 
 const [useSubproductsContext, SubproductsProviderBase] = createGenericContext<SubproductsContext>()
 
@@ -15,62 +17,33 @@ const SubproductsProvider: React.FC<{
   const { allSubproducts, updateCacheKeySuffixForRefetchingData } = useProductsContext()
   const { postData } = usePostData()
 
-  const getFilteredSubProductsBySubcategoryId = useCallback((): Subproduct[] => {
-    return selectedSubcategoryId
-      ? allSubproducts.filter(({ subCategoryId }) => subCategoryId === selectedSubcategoryId)
-      : []
-  }, [allSubproducts, selectedSubcategoryId])
-
-  const initialFilteredSubProducts = useMemo(getFilteredSubProductsBySubcategoryId, [
-    getFilteredSubProductsBySubcategoryId,
-  ])
-
-  const [allSubProductsState, setAllSubProductsState] = useState<Subproduct[]>(
-    initialFilteredSubProducts
-  )
-  const [filteredSubProducts, setFilteredSubProducts] = useState<Subproduct[]>(
-    initialFilteredSubProducts
-  )
+  const {
+    allSubProductsState,
+    setAllSubProductsState,
+    filteredSubProducts,
+    setFilteredSubProducts,
+  } = useSubproductsInitialState(allSubproducts, selectedSubcategoryId)
 
   const { isNewItemFormOpen, setIsNewItemFormOpen, inputValue, setInputValue } = useNewItems()
 
-  const handleSubproductSearch = useCallback(
-    (query: string) => {
-      const lowerCaseQuery = query.toLowerCase()
-      setFilteredSubProducts(
-        allSubProductsState.filter(({ subProductName }) =>
-          subProductName.toLowerCase().includes(lowerCaseQuery)
-        )
-      )
-    },
-    [allSubProductsState]
+  const { handleSubproductSearch, addNewSubproductOptimistically } = useSubproductActions(
+    allSubProductsState,
+    setAllSubProductsState,
+    setFilteredSubProducts,
+    selectedSubcategoryId
   )
 
-  const handleAddNewSubproduct = useCallback(
-    (value: string) => {
-      const newSubProduct = {
-        subProductId: allSubProductsState.length,
-        subProductName: value,
-        subCategoryId: selectedSubcategoryId,
-      }
-
-      setAllSubProductsState((prev) => [...prev, newSubProduct])
-      setFilteredSubProducts((prev) => [...prev, newSubProduct])
-    },
-    [allSubProductsState, selectedSubcategoryId]
-  )
-
-  const handleNewItem = useCallback(() => {
+  const handleNewSubproduct = useCallback(() => {
     if (!inputValue) return setIsNewItemFormOpen(false)
 
     // 💡 optimistical UI update.
     // the new subproduct item gets added instantly
     // without waiting for the api call to resolve.
-    handleAddNewSubproduct(inputValue)
+    addNewSubproductOptimistically(inputValue)
 
     setInputValue('')
     setIsNewItemFormOpen(false)
-    // hook for POST of the new item created
+    // hook for POST api req for the new subproduct created
     postData(API_CONFIG.SUBPRODUCTS_URL, {
       subProductName: inputValue,
       subCategoryId: selectedSubcategoryId,
@@ -82,16 +55,16 @@ const SubproductsProvider: React.FC<{
         `${selectedSubcategoryId}-${selectedSubcategoryId}-${inputValue.charAt(0)}`
       )
     )
-  }, [inputValue, handleAddNewSubproduct, setIsNewItemFormOpen, setInputValue])
+  }, [inputValue, setIsNewItemFormOpen, setIsNewItemFormOpen, setInputValue])
 
   const memoizedSubproductContextValues = useMemo(
     () => ({
       filteredSubProducts,
       setFilteredSubProducts,
       handleSubproductSearch,
-      handleNewItem,
-      isNewItemFormOpen,
-      setIsNewItemFormOpen,
+      handleNewSubproduct,
+      isNewSubproductFormOpen: isNewItemFormOpen,
+      setIsNewSubproductFormOpen: setIsNewItemFormOpen,
       inputValue,
       setInputValue,
     }),
@@ -99,7 +72,7 @@ const SubproductsProvider: React.FC<{
       filteredSubProducts,
       setFilteredSubProducts,
       handleSubproductSearch,
-      handleNewItem,
+      handleNewSubproduct,
       isNewItemFormOpen,
       setIsNewItemFormOpen,
       inputValue,

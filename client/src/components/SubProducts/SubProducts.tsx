@@ -17,17 +17,18 @@ import NewItemForm from '@/molecules/NewItemForm'
 import { useSubproductsContext } from '@/context/SubProductContext'
 
 const SubProductsBody = ({ children }: { children: React.ReactNode }) => {
-  const { isNewItemFormOpen, inputValue, setInputValue, handleNewItem } = useSubproductsContext()
+  const { isNewSubproductFormOpen, inputValue, setInputValue, handleNewSubproduct } =
+    useSubproductsContext()
 
   return (
     <Body>
       <SearchBar type="subproducts">Search ...</SearchBar>
       <SubProductsListView>{children}</SubProductsListView>
-      <ConditionalRender condition={isNewItemFormOpen}>
+      <ConditionalRender condition={isNewSubproductFormOpen}>
         <NewItemForm
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
-          onAdd={handleNewItem}
+          onAdd={handleNewSubproduct}
         />
       </ConditionalRender>
     </Body>
@@ -42,12 +43,12 @@ const SubProductsHeader = ({ children }: { children: React.ReactNode }) => (
 )
 
 const SubProductsFooter = ({ children }: { children: React.ReactNode }) => {
-  const { isNewItemFormOpen, setIsNewItemFormOpen } = useSubproductsContext()
+  const { isNewSubproductFormOpen, setIsNewSubproductFormOpen } = useSubproductsContext()
 
   return (
     <Footer>
-      <ConditionalRender condition={!isNewItemFormOpen}>
-        <Button onClick={() => setIsNewItemFormOpen(true)} Icon={PlusIcon}>
+      <ConditionalRender condition={!isNewSubproductFormOpen}>
+        <Button onClick={() => setIsNewSubproductFormOpen(true)} Icon={PlusIcon}>
           {children}
         </Button>
       </ConditionalRender>
