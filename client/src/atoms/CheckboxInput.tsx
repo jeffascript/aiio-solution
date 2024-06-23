@@ -12,7 +12,13 @@ const CheckboxInput = forwardRef<HTMLInputElement, CheckboxInputProps>(
     return (
       <>
         <label htmlFor={id.toString()}>{label}</label>
-        <input type="checkbox" ref={ref} {...props} className={styles['input__checkbox']} />
+        <input
+          type="checkbox"
+          ref={ref}
+          {...props}
+          className={styles['input__checkbox']}
+          aria-labelledby={id.toString()}
+        />
       </>
     )
   }

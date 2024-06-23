@@ -1,4 +1,4 @@
-import React from 'react'
+/* eslint-disable react/react-in-jsx-scope */
 import Container from '@/molecules/Container'
 
 import { SubproductsProvider } from '@/context/SubProductContext'

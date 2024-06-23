@@ -1,4 +1,5 @@
-import React, { createContext, useContext, ReactNode } from 'react'
+/* eslint-disable react/react-in-jsx-scope */
+import { createContext, useContext, ReactNode } from 'react'
 
 export function createGenericContext<T>() {
   const context = createContext<T | null>(null)

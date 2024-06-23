@@ -9,8 +9,6 @@ export const useProcessSelectedData = () => {
     selectedProducts: [],
   })
 
-  console.log(doneResult, 'CALC')
-
   const processAllSelectedData = useCallback((data: AllData) => {
     const newResult: DoneResultAsNode = {}
     const newDoneResult: DoneResult = {

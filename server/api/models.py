@@ -24,3 +24,12 @@ class SubProduct(models.Model):
 
     def __str__(self):
         return self.subProductName
+
+class HierarchyData(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    subCategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
+    subProduct = models.ForeignKey(SubProduct, on_delete=models.CASCADE)
+    hierarchy = models.JSONField()
+
+    def __str__(self):
+        return f"{self.product.productName} -> {self.subCategory.subCategoryName} -> {self.subProduct.subProductName}"

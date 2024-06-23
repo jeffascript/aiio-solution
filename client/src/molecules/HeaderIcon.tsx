@@ -1,4 +1,4 @@
-import React from 'react'
+/* eslint-disable react/react-in-jsx-scope */
 import ArrowIcon from '@/assets/arrow.svg?react'
 
 import styles from '@/molecules/molecules.module.css'

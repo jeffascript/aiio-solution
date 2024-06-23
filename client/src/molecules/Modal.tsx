@@ -1,4 +1,5 @@
-import React, { ReactNode } from 'react'
+/* eslint-disable react/react-in-jsx-scope */
+import { ReactNode } from 'react'
 import styles from '@/molecules/molecules.module.css'
 import { combineClassNames } from '@/utils/combineClassNames'
 import { useClickAway } from '@/hooks/useClickAway'
@@ -11,6 +12,7 @@ export const ModalContainer = ({ children }: { children: ReactNode }) => {
 
   return (
     <div
+      data-testid="modal-done-showcase"
       className={combineClassNames([
         styles['modal__overlay'],
         isModalOpen && styles['modal__overlay-show'],

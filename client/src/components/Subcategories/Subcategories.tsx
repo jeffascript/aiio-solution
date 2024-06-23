@@ -1,4 +1,6 @@
-import React from 'react'
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable react/react-in-jsx-scope */
+
 import Container from '@/molecules/Container'
 
 import { SubcategoriesProvider } from '@/context/SubcategoryContext'
