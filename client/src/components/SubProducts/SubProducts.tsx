@@ -1,74 +1,26 @@
 import React from 'react'
-import Body from '@/molecules/Body'
-import Button from '@/molecules/Button'
 import Container from '@/molecules/Container'
-import { HeaderTitle, Header } from '@/molecules/Header'
-import PlusIcon from '@/assets/plus.svg?react'
-import Footer from '@/molecules/Footer'
 
-import SearchBar from '@/molecules/SearchBar'
-import SubProductsListView from './SubProductsListView'
-import HeaderIcon from '@/molecules/HeaderIcon'
 import { SubproductsProvider } from '@/context/SubProductContext'
 import { getStyleToken } from '@/utils/token'
 
-import ConditionalRender from '@/molecules/ConditionalRender'
-import NewItemForm from '@/molecules/NewItemForm'
-import { useSubproductsContext } from '@/context/SubProductContext'
+import { SubProductsBody, SubProductsFooter, SubProductsHeader } from './SubProductsFactory'
 
-const SubProductsBody = ({ children }: { children: React.ReactNode }) => {
-  const { isNewSubproductFormOpen, inputValue, setInputValue, handleNewSubproduct } =
-    useSubproductsContext()
-
-  return (
-    <Body>
-      <SearchBar type="subproducts">Search ...</SearchBar>
-      <SubProductsListView>{children}</SubProductsListView>
-      <ConditionalRender condition={isNewSubproductFormOpen}>
-        <NewItemForm
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-          onAdd={handleNewSubproduct}
-        />
-      </ConditionalRender>
-    </Body>
-  )
-}
-
-const SubProductsHeader = ({ children }: { children: React.ReactNode }) => (
-  <Header>
-    <HeaderTitle>{children}</HeaderTitle>
-    <HeaderIcon />
-  </Header>
-)
-
-const SubProductsFooter = ({ children }: { children: React.ReactNode }) => {
-  const { isNewSubproductFormOpen, setIsNewSubproductFormOpen } = useSubproductsContext()
-
-  return (
-    <Footer>
-      <ConditionalRender condition={!isNewSubproductFormOpen}>
-        <Button onClick={() => setIsNewSubproductFormOpen(true)} Icon={PlusIcon}>
-          {children}
-        </Button>
-      </ConditionalRender>
-    </Footer>
-  )
-}
-
-const SubProducts: React.FC<{ children?: React.ReactNode; subCategoryId: number }> = ({
-  children,
-  subCategoryId,
-}) => {
+function SubProducts({ subCategoryId }: { subCategoryId: number }) {
   return (
     <Container backgroundColor={getStyleToken('greyColor')}>
-      <SubproductsProvider selectedSubcategoryId={subCategoryId}>
-        <SubProductsHeader>Select Sub-Products</SubProductsHeader>
-        <SubProductsBody>{children}</SubProductsBody>
-        <SubProductsFooter>Add Sub-Product </SubProductsFooter>
-      </SubproductsProvider>
+      <SubProducts.Provider selectedSubcategoryId={subCategoryId}>
+        <SubProducts.Header>Select Sub-Products</SubProducts.Header>
+        <SubProducts.Body />
+        <SubProducts.Footer>Add Sub-Product </SubProducts.Footer>
+      </SubProducts.Provider>
     </Container>
   )
 }
+
+SubProducts.Provider = SubproductsProvider
+SubProducts.Header = SubProductsHeader
+SubProducts.Body = SubProductsBody
+SubProducts.Footer = SubProductsFooter
 
 export default SubProducts

@@ -36,21 +36,26 @@ export type ProductsContext = {
   updateCacheKeySuffixForRefetchingData: (suffix: string) => void
 }
 
-export interface SubcatergoriesContext {
+export interface SubcategoriesContext {
   filteredSubcategories: Array<Subcategory>
   setFilteredSubcategories: React.Dispatch<React.SetStateAction<Subcategory[]>>
   handleSubcategorySearch: (query: string) => void
+  inputValue: string
+  setInputValue: React.Dispatch<React.SetStateAction<string>>
+  handleNewSubCategory: () => void
+  isNewSubCategoryFormOpen: boolean
+  setIsNewSubCategoryFormOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export interface SubproductsContext {
   filteredSubProducts: Array<Subproduct>
   setFilteredSubProducts: React.Dispatch<React.SetStateAction<Subproduct[]>>
   handleSubproductSearch: (query: string) => void
-  isNewItemFormOpen: boolean
-  setIsNewItemFormOpen: React.Dispatch<React.SetStateAction<boolean>>
+  isNewSubproductFormOpen: boolean
+  setIsNewSubproductFormOpen: React.Dispatch<React.SetStateAction<boolean>>
   inputValue: string
   setInputValue: React.Dispatch<React.SetStateAction<string>>
-  handleNewItem: () => void
+  handleNewSubproduct: () => void
 }
 
 export type AllData = Record<

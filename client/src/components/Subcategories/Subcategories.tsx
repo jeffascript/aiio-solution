@@ -1,71 +1,25 @@
 import React from 'react'
-import Body from '@/molecules/Body'
-import Button from '@/molecules/Button'
 import Container from '@/molecules/Container'
-import { HeaderTitle, Header } from '@/molecules/Header'
-import PlusIcon from '@/assets/plus.svg?react'
-import Footer from '@/molecules/Footer'
 
-import SearchBar from '@/molecules/SearchBar'
-import SubcategoriesListView from './SubcategoriesListView'
-import HeaderIcon from '@/molecules/HeaderIcon'
-import { SubcategoriesProvider, useSubcatergoriesContext } from '@/context/SubcategoryContext'
+import { SubcategoriesProvider } from '@/context/SubcategoryContext'
 import { getStyleToken } from '@/utils/token'
-import ConditionalRender from '@/molecules/ConditionalRender'
-import NewItemForm from '@/molecules/NewItemForm'
+import { SubcategoriesBody, SubcategoriesFooter, SubcategoriesHeader } from './SubcategoriesFactory'
 
-const SubcategoriesHeader = ({ children }: { children: React.ReactNode }) => (
-  <Header>
-    <HeaderTitle>{children}</HeaderTitle>
-    <HeaderIcon />
-  </Header>
-)
-
-const SubcategoriesBody = ({ children }: { children: React.ReactNode }) => {
-  const { handleNewSubCategory, isNewSubCategoryFormOpen, inputValue, setInputValue } =
-    useSubcatergoriesContext()
-  return (
-    <Body>
-      <SearchBar type="subcategories">Search ...</SearchBar>
-      <SubcategoriesListView>{children}</SubcategoriesListView>
-      <ConditionalRender condition={isNewSubCategoryFormOpen}>
-        <NewItemForm
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-          onAdd={handleNewSubCategory}
-        />
-      </ConditionalRender>
-    </Body>
-  )
-}
-
-const SubcategoriesFooter = ({ children }: { children: React.ReactNode }) => {
-  const { setIsNewSubCategoryFormOpen, isNewSubCategoryFormOpen } = useSubcatergoriesContext()
-
-  return (
-    <Footer>
-      <ConditionalRender condition={!isNewSubCategoryFormOpen}>
-        <Button onClick={() => setIsNewSubCategoryFormOpen(true)} Icon={PlusIcon}>
-          {children}
-        </Button>
-      </ConditionalRender>
-    </Footer>
-  )
-}
-
-const Subcategories: React.FC<{ children?: React.ReactNode; selectedProductId: number }> = ({
-  children,
-  selectedProductId,
-}) => {
+function Subcategories({ selectedProductId }: { selectedProductId: number }) {
   return (
     <Container backgroundColor={getStyleToken('darkerColor')}>
-      <SubcategoriesProvider selectedProductId={selectedProductId}>
-        <SubcategoriesHeader> Select Categories </SubcategoriesHeader>
-        <SubcategoriesBody>{children}</SubcategoriesBody>
-        <SubcategoriesFooter> Add Category</SubcategoriesFooter>
-      </SubcategoriesProvider>
+      <Subcategories.Provider selectedProductId={selectedProductId}>
+        <Subcategories.Header> Select Categories </Subcategories.Header>
+        <Subcategories.Body />
+        <Subcategories.Footer> Add Category</Subcategories.Footer>
+      </Subcategories.Provider>
     </Container>
   )
 }
+
+Subcategories.Provider = SubcategoriesProvider
+Subcategories.Header = SubcategoriesHeader
+Subcategories.Body = SubcategoriesBody
+Subcategories.Footer = SubcategoriesFooter
 
 export default Subcategories

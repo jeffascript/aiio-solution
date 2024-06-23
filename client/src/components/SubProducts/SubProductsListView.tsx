@@ -5,7 +5,7 @@ import { useToggleItem } from '@/hooks/useToggleItem'
 import CheckboxInput from '@/atoms/CheckboxInput'
 import { useSubproductsContext } from '@/context/SubProductContext'
 
-const SubproductsListView = ({ children }: { children?: React.ReactNode }) => {
+const SubproductsListView = () => {
   const { handleToggleSelectedItem, selectedItem } = useToggleItem('subproducts')
 
   const { filteredSubProducts: processedSubProducts } = useSubproductsContext()

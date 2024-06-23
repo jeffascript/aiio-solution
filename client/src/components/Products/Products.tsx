@@ -11,7 +11,7 @@ import { ProductsProvider } from '@/context/ProductsContext'
 import { getStyleToken } from '@/utils/token'
 import { useToggleItemContext } from '@/context/ToggleItemContext'
 
-const ProductsHeader = ({ children }: { children: React.ReactNode }) => {
+export const ProductsHeader = ({ children }: { children: React.ReactNode }) => {
   const { toggleModal, getAllSelectedData } = useToggleItemContext()
 
   return (
@@ -29,30 +29,29 @@ const ProductsHeader = ({ children }: { children: React.ReactNode }) => {
   )
 }
 
-const ProductsBody = ({ children }: { children: React.ReactNode }) => (
+export const ProductsBody = () => (
   <Body>
     <ProductsProvider>
-      <ProductsListView>{children}</ProductsListView>
+      <ProductsListView />
     </ProductsProvider>
   </Body>
 )
 
-const ProductsFooter = ({ children }: { children: React.ReactNode }) => (
+export const ProductsFooter = ({ children }: { children: React.ReactNode }) => (
   <Footer>
     <Button Icon={PlusIcon}>{children}</Button>
   </Footer>
 )
 
-const Products: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
+export function Products({ children }: { children: React.ReactNode }) {
   return (
     <Container backgroundColor={getStyleToken('primaryColor')}>
-      <ProductsProvider>
-        <ProductsHeader>Products</ProductsHeader>
-        <ProductsBody>{children}</ProductsBody>
-        <ProductsFooter>Add Product</ProductsFooter>
-      </ProductsProvider>
+      <ProductsProvider> {children}</ProductsProvider>
     </Container>
   )
 }
 
-export default Products
+// Assign the subcomponents to the Products component
+Products.Header = ProductsHeader
+Products.Body = ProductsBody
+Products.Footer = ProductsFooter

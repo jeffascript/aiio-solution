@@ -7,7 +7,7 @@ import ConditionalRender from '@/molecules/ConditionalRender'
 import CheckboxInput from '@/atoms/CheckboxInput'
 import { useProductsContext } from '@/context/ProductsContext'
 
-const ProductsListView = ({ children }: { children: React.ReactNode }) => {
+const ProductsListView = () => {
   const { allProducts, isLoading, error } = useProductsContext()
 
   const { handleToggleSelectedItem, selectedItem } = useToggleItem('products')
@@ -40,12 +40,5 @@ const ProductsListView = ({ children }: { children: React.ReactNode }) => {
     </>
   )
 }
-
-// Products.Container = Container
-// Products.List = UsersList
-// Products.Card = UserCard
-// Products.Header = UsersHeader
-// Products.BodyContents = UsersBodyContents
-// Products.LoadMoreButton = LoadMoreUsersButton
 
 export default ProductsListView

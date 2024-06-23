@@ -7,7 +7,7 @@ import ConditionalRender from '@/molecules/ConditionalRender'
 import CheckboxInput from '@/atoms/CheckboxInput'
 import { useSubcatergoriesContext } from '@/context/SubcategoryContext'
 
-const SubcategoriesListView = ({ children }: { children?: React.ReactNode }) => {
+const SubcategoriesListView = () => {
   const { handleToggleSelectedItem, selectedItem } = useToggleItem('subcategories')
 
   const { filteredSubcategories: processedSubcategories } = useSubcatergoriesContext()

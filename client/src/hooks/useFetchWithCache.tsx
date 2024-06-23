@@ -19,11 +19,10 @@ export const useFetchWithCache = <T extends Array<Record<string, unknown>>>(
         const cacheKey = `${urls.join(',')}${cacheKeySuffix}`
         if (cache.current[cacheKey] && !skipCache) {
           const cachedData = cache.current[cacheKey]
-          console.log('cache', cache.current)
+
           setData(cachedData)
           callback?.(cachedData)
         } else {
-          console.log('new', cache.current)
           const responses = await Promise.all(urls.map((url) => fetch(url)))
 
           const isOk = responses.every((response) => response.ok)
