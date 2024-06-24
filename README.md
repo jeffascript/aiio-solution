@@ -49,7 +49,7 @@ https://www.loom.com/share/83988d64b9a14a80a83bd533a15990ca?sid=f03a79d5-cd04-44
 	*... mostly dev pkgs*
 - Node v.18xx (you can easily throttle node versions with nvm installed in your PC)
 
-## 🧐 How To Start the App (Locally)
+## 🧐 How To Start the App (Docker)
 
 - [ ] `make docker-build` to build the api & db
 - [ ] ` make docker-seed` to seed the db with initial data
