@@ -1,5 +1,5 @@
  
-## 📋 Content of the task
+## 📋 Functional Requirement (acceptable criteria)
 
 
 - [x] Finishing the UI functionalities including adding new subProducts
@@ -80,7 +80,7 @@ once these steps are done:
 - Cover more test cases
 - 
 
-What are your thoughts on the Eager Loading strategy utilized in this implementation against Lazy Loading ?
+What are your thoughts on the **Eager Loading** strategy utilized in this implementation against _Lazy Loading_ ?
 
 Happy Coding! 👋🏽
 
