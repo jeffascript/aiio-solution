@@ -10,7 +10,7 @@ docker-seed:
 
 # Start the Express app containerized
 docker-start:
-	docker-compose up -d client
+	docker-compose up -d client --build
 
 # Stop the Django, React & DB
 docker-stop:

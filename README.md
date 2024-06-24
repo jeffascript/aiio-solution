@@ -40,6 +40,7 @@ https://www.loom.com/share/83988d64b9a14a80a83bd533a15990ca?sid=f03a79d5-cd04-44
 
 - Eslint
 - Prettier
+- Makefile & Bash for cmds
 	*... mostly dev pkgs*
 - Node v.18xx (you can easily throttle node versions with nvm installed in your PC)
 
