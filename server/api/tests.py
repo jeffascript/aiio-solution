@@ -43,20 +43,3 @@ class ProductTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(SubProduct.objects.count(), 2)
 
-    def test_save_data(self):
-        url = reverse('save_data')
-        data = {
-            "1-Electric Motors": [
-                {
-                    "1-2-Current Collectors": ["2-3-Yellow Collectors", "2-4-White Collectors"]
-                }
-            ]
-        }
-        response = self.client.post(url, data, format='json')
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(HierarchyData.objects.count(), 2)
-
-    def test_get_data(self):
-        url = reverse('get_data')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)

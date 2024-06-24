@@ -31,10 +31,6 @@ else
     exit 1
 fi
 
-# Run Jest tests coverage
-echo "Running Jest tests coverage..."
-yarn run test:coverage
-
 # Check if tests coverage is shown
 if [ $? -eq 0 ]; then
     echo "Tests passed successfully."

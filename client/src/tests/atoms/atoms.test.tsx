@@ -1,15 +1,13 @@
 /* eslint-disable react/react-in-jsx-scope */
+import CheckboxInput from '@/atoms/CheckboxInput'
+import PolymorphicInput from '@/atoms/PolyMorphicInput'
+import SearchInput from '@/atoms/SearchInput'
+import SelectInput from '@/atoms/SelectInput'
 import '@testing-library/jest-dom/extend-expect'
 
 import { render, screen } from '@testing-library/react'
-// import { screen } from '@testing-library/dom'
 
-import CheckboxInput from '../atoms/CheckboxInput'
-import SearchInput from '../atoms/SearchInput'
-import SelectInput from '../atoms/SelectInput'
-import PolymorphicInput from '../atoms/PolyMorphicInput'
 import React from 'react'
-// import Main from './components/Main'
 
 const checkBoxProps = {
   'name': 'testCheckbox',

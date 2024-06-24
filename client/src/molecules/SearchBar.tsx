@@ -6,13 +6,11 @@ import { useSubcatergoriesContext } from '@/context/SubcategoryContext'
 import { useSubproductsContext } from '@/context/SubProductContext'
 import { customDebounce } from '@/utils/debounce'
 
-const SearchBar = ({
-  children,
-  type,
-}: {
+type SearchBarProps = {
   children?: React.ReactNode
   type: 'subcategories' | 'subproducts'
-}) => {
+}
+const SearchBar = ({ children, type }: SearchBarProps) => {
   const { value, setValue } = useInput('')
 
   const handleSearch =

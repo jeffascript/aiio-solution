@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Main from '@/components/Main'
-import { Products } from '@/components/Products/Products'
+import { Products } from '@/components/Products'
 import { ToggleItemProvider } from '@/context/ToggleItemContext'
 import { ModalDoneShowcase } from '@/components/Modal'
 
