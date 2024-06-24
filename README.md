@@ -27,10 +27,15 @@ https://www.loom.com/share/83988d64b9a14a80a83bd533a15990ca?sid=f03a79d5-cd04-44
 - **Migration/Seeding**: The vehicle table was seeded. And the appropriate endpoints to retrieve data was added
 
 - **Endpoints  **:  
-		 - `Get all Products:`**  `{{apiUrlrl}}/api/v1/products`
-		 - `Get all Subcategories:`**  `{{apiUrlrl}}/api/v1/subcategories`
-		 - `Get all /POST subproducts:`**  `{{apiUrlrl}}/api/v1/subproducts`
-		 - `POST Done Date:`**  `{{apiUrlrl}}/api/v1/save`
+
+
+  		Get all Products: {{apiUrlrl}}/api/v1/products
+  
+		Get all Subcategories: {{apiUrlrl}}/api/v1/subcategories
+  
+		Get all /POST subproducts: {{apiUrlrl}}/api/v1/subproducts
+  
+		POST save Done Data: {{apiUrlrl}}/api/v1/save`
 
 - **Styling**:  
 	Styled with BEM methodology  and style scoped as css modules. No UI Library used whatsoever.
